@@ -1,0 +1,33 @@
+@mixin lightTheme($color) {
+    &.light{
+        color: $color;
+    }
+}
+
+@mixin cards {
+    width: 15rem;
+    border-radius: 7px;
+    background-color: $CardBgDark;
+    color: $WhiteText;
+    cursor: pointer;
+    &:hover {
+        background-color: $TextLight;
+      }
+      @include responsive(phone) {
+        width: 18rem;
+      }
+      &.light {
+        background-color: $TopBgPatternLight;
+  
+        &:hover {
+          background-color: $CardBgLight;
+        }
+      }
+}
+
+@mixin flexBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @content;
+}

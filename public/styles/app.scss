@@ -1,0 +1,360 @@
+// GLOBAL RULES ;
+@import "break-points";
+@import "variables";
+@import "mixins";
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  font-size: 10rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 0.875rem;
+}
+
+h5 {
+  font-size: 0.825rem;
+}
+
+@include responsive(Medium_Screens) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  h5 {
+    font-size: 0.75rem;
+  }
+
+  body {
+    font-size: 14px;
+    background-color: $BgDark;
+
+    &.light {
+      background-color: $BgLight;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    line-height: 1;
+  }
+}
+
+@include responsive(phone) {
+  body {
+    font-size: 12px;
+    background-color: $BgDark;
+    &.light {
+      background-color: $BgLight;
+    }
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 0.75rem;
+  }
+
+  h5 {
+    font-size: 0.5rem;
+  }
+}
+
+// END GLOBAL RULES
+
+/* START HEADER SECTION */
+.container {
+  background-color: $TopBgPattern;
+  padding-block: 1rem 6rem;
+  position: relative;
+  @include responsive(phone) {
+    padding-block: 1rem 4rem;
+  }
+
+  &.light {
+    background-color: $TopBgPatternLight;
+  }
+
+  header {
+    @include flexBox;
+    margin: 2rem 6rem;
+    color: $WhiteText;
+    @include responsive(phone) {
+      flex-direction: column;
+      margin: 1rem 0;
+    }
+    @include lightTheme($TextLightBlue);
+
+    & .main-title {
+      h5 {
+        color: $TextDark;
+        @include lightTheme($TextLight);
+      }
+      & .line {
+        display: none;
+        @include responsive(phone) {
+          display: block;
+          margin-block: 1rem;
+          border: none;
+          height: 1px;
+          background: $TextDark;
+        }
+      }
+    }
+  }
+
+  // toggle style
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .toggle {
+    @include flexBox;
+    @include responsive(phone) {
+      width: 18rem;
+      color: $TextDark;
+    }
+  }
+
+  .label {
+    @include flexBox;
+    height: 24px;
+    width: 50px;
+    margin-left: 1rem;
+    border-radius: 20px;
+    position: relative;
+    background-image: $ToggleDark;
+    cursor: pointer;
+  }
+
+  .checkbox:checked + .label {
+    background: $ToggleLight;
+  }
+
+  .checkbox:checked + .label .switch {
+    transform: translateX(26px);
+  }
+
+  .switch {
+    width: 20px;
+    height: 20px;
+    left: 2px;
+    position: absolute;
+    background-color: $TopBgPatternLight;
+    border-radius: 50%;
+  }
+}
+
+/* END HEADER SECTION */
+
+/* START MAIN SECTION */
+main {
+  @include flexBox;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 25%;
+  margin: 0 5.5rem;
+  gap: 40px;
+  @include responsive(phone) {
+    flex-direction: column;
+    margin: 0 3rem;
+  }
+
+  & .box {
+    @include flexBox;
+    @include cards;
+    flex-direction: column;
+    padding: 2rem 0;
+    
+
+    @include lightTheme($TextLightBlue);
+    
+
+    &:first-child {
+      &::before {
+        background-color: $BorderFB;
+      }
+    }
+
+    &:nth-child(2) {
+      &::before {
+        background-color: $BorderTwit;
+      }
+    }
+
+    &:nth-child(3) {
+      &::before {
+        background-image: $BorderInsta;
+      }
+    }
+
+    &:last-child {
+      &::before {
+        background-color: $BorderYT;
+      }
+    }
+
+    &:first-child,
+    &:nth-child(2),
+    &:nth-child(3),
+    &:last-child {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 15rem;
+        height: 5px;
+        top: 0;
+        border-radius: 7px 7px 0 0;
+        @include responsive(phone) {
+          width: 18rem;
+        }
+      }
+    }
+
+    & .author {
+      @include flexBox;
+      p {
+        color: $TextDark;
+        @include lightTheme($TextLight);
+      }
+
+      & img {
+        margin-right: 5px;
+      }
+    }
+
+    & .follows {
+      letter-spacing: 0.25rem;
+      margin-bottom: 1rem;
+      color: $TextDark;
+      @include lightTheme($TextLight);
+    }
+  }
+}
+
+.stats {
+  @include flexBox;
+
+  & img {
+    margin-right: 5px;
+  }
+
+  &.up {
+    color: $FontGreen;
+  }
+
+  &.down {
+    color: $FontBrighRed;
+  }
+}
+
+/* END MAIN SECTION */
+
+.second-title {
+  margin: 12rem 0 2rem 6rem;
+  @include responsive(phone) {
+    margin: 60rem 0 2rem 3rem;
+  }
+
+  h3 {
+    color: $WhiteText;
+    @include lightTheme($TextLightBlue);
+  }
+}
+
+/* START SECTION */
+section {
+  @include flexBox;
+  flex-wrap: wrap;
+  margin: 0 6rem;
+  gap: 30px 25px;
+  @include responsive(phone) {
+    flex-direction: column;
+    margin: 0 3rem;
+  }
+
+  & .item {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    @include cards;
+    padding: 1rem 2rem;
+
+    &.light {
+      @include lightTheme($TextLightBlue);
+    }
+
+    h5 {
+      color: $TextDark;
+      @include lightTheme($TextLight);
+    }
+  }
+}
+.attribution{
+  margin-top: 2rem;
+}
+/* END SECTION */
